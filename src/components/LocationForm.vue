@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import Weather from "@/support/Weather";
 import debounce from "lodash/debounce";
 import GeoLocation from "@/support/GeoLocation";
 
@@ -20,37 +19,23 @@ export default {
     };
   },
   methods: {
-    async getWeatherData() {
-      const response = await new Weather()
-        .fahrenheit()
-        [this.locationType](this.location)
-        .get();
-      this.weather = response.data;
-      window.localStorage.setItem("location", JSON.stringify(this.location));
-      window.localStorage.setItem("locationType", this.locationType);
-      this.$emit("input", this.weather);
-    },
     handleZip: debounce(async function(e) {
-      this.locationType = "byZip";
-      this.getWeatherData(e.target.value);
+      this.location = e.target.value;
+      this.$emit("input", {
+        locationType: "byZip",
+        location: this.location
+      });
     }, 400),
     async handleCurrentLocation() {
       try {
         this.location = await new GeoLocation().getCurrent();
-        this.locationType = "byGeoLocation";
-        this.getWeatherData();
+        this.$emit("input", {
+          locationType: "byGeoLocation",
+          location: this.location
+        });
       } catch (err) {
-        this.locationType = "byZip";
+        console.log(err);
       }
-    }
-  },
-  created() {
-    const savedLocation = window.localStorage.getItem("location");
-    const savedLocationType = window.localStorage.getItem("locationType");
-    if (savedLocation && savedLocationType) {
-      this.location = JSON.parse(savedLocation);
-      this.locationType = savedLocationType;
-      this.getWeatherData();
     }
   }
 };
