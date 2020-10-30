@@ -4,7 +4,6 @@ export default class GeoLocation {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
         position => {
-          console.log(position);
           resolve({
             lat: position.coords.latitude,
             long: position.coords.longitude
