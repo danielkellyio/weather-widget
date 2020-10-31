@@ -1,7 +1,8 @@
 <template>
   <div class="weather-widget">
-    <weather-display v-if="location" :weather="weather" />
-    <location-form v-else v-model="location" @input="getWeatherData" />
+    <reload-trigger />
+    <weather-display v-if="$store.location" :weather="$store.weather" />
+    <location-form v-else />
   </div>
 </template>
 <script>
@@ -14,7 +15,8 @@ export default {
       weather: {
         weather: [],
         main: {},
-        name: null
+        name: null,
+        wind: {}
       }
     };
   },
@@ -25,27 +27,22 @@ export default {
         [locationType](location)
         .get();
 
-      this.weather = response.data;
+      this.$store.weather = response.data;
       window.localStorage.setItem("location", JSON.stringify(location));
       window.localStorage.setItem("locationType", locationType);
     }
   },
   created() {
-    const savedLocation = window.localStorage.getItem("location");
-    const savedLocationType = window.localStorage.getItem("locationType");
-    if (savedLocation && savedLocationType) {
-      this.location = savedLocation;
-      this.getWeatherData({
-        location: JSON.parse(savedLocation),
-        locationType: savedLocationType
-      });
-    }
+    this.$store.initWeather();
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .weather-widget {
+  position: relative;
+  background: var(--bg-color);
+  min-width: 400px;
   display: inline-block;
   margin: 0 auto;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
