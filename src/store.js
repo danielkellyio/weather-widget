@@ -32,9 +32,6 @@ export default Vue.observable({
   set temp(value) {
     this.weather.main.temp = value;
   },
-  reload() {
-    this.getWeatherData();
-  },
   initWeather() {
     const savedLocation = window.localStorage.getItem("location");
     const savedLocationType = window.localStorage.getItem("locationType");

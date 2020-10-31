@@ -1,11 +1,7 @@
 <template>
-  <font-awesome-icon
-    icon="sync-alt"
-    style="color:white"
-    class="reload-icon"
-    :class="{ spin }"
-    @click="$store.reload"
-  />
+  <span @click="$store.getWeatherData()" class="reload-icon">
+    <font-awesome-icon icon="sync-alt" style="color:white" :class="{ spin }" />
+  </span>
 </template>
 <script>
 export default {
