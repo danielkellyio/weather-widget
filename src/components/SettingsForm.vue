@@ -78,7 +78,9 @@ export default {
   watch: {
     "$store.tempUnit": {
       handler() {
-        this.$store.getWeatherData();
+        if (this.$store.location) {
+          this.$store.getWeatherData();
+        }
       }
     }
   }
