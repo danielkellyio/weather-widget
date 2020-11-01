@@ -4,6 +4,11 @@ export default Vue.observable({
   loading: false,
   location: null,
   locationType: null,
+  flipped: false,
+  flat: false,
+  _settings: false,
+  tempUnit: "fahrenheit",
+  error: null,
   weather: {
     weather: [],
     main: {},
@@ -11,6 +16,9 @@ export default Vue.observable({
     wind: {},
     snow: {},
     rain: {}
+  },
+  get tempUnitAbbrev() {
+    return this.tempUnit[0].toUpperCase();
   },
   get tempMin() {
     return Math.round(this.weather.main.temp_min);
@@ -40,6 +48,15 @@ export default Vue.observable({
   set temp(value) {
     this.weather.main.temp = value;
   },
+  get settings() {
+    return this._settings;
+  },
+  set settings(value) {
+    this.flipped = value;
+    setTimeout(() => {
+      this._settings = value;
+    }, 250);
+  },
   initWeather() {
     const savedLocation = window.localStorage.getItem("location");
     const savedLocationType = window.localStorage.getItem("locationType");
@@ -51,14 +68,19 @@ export default Vue.observable({
   },
   async getWeatherData() {
     this.loading = true;
-    const response = await new Weather()
-      .fahrenheit()
-      [this.locationType](this.location)
-      .get();
+    try {
+      const response = await new Weather()
+        [this.tempUnit]()
+        [this.locationType](this.location)
+        .get();
 
-    this.weather = response.data;
+      this.error = false;
+      this.weather = response.data;
+      window.localStorage.setItem("location", JSON.stringify(this.location));
+      window.localStorage.setItem("locationType", this.locationType);
+    } catch (error) {
+      this.error = true;
+    }
     this.loading = false;
-    window.localStorage.setItem("location", JSON.stringify(this.location));
-    window.localStorage.setItem("locationType", this.locationType);
   }
 });

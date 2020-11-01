@@ -1,9 +1,25 @@
 <template>
-  <div class="weather-widget" :class="{ loading: $store.loading }">
-    <div class="inner">
-      <reload-trigger />
-      <weather-display v-if="$store.location" :weather="$store.weather" />
-      <location-form v-else />
+  <div class="flip-card" :class="{ flipped: $store.flipped }">
+    <div
+      class="weather-widget flip-card-inner"
+      :class="{ loading: $store.loading, flat: $store.flat }"
+    >
+      <div class="fade-in">
+        <reload-trigger :class="{ 'flip-card-back': $store.settings }" />
+        <weather-display
+          class="fade-in"
+          v-if="$store.location && !$store.settings && !$store.error"
+          :weather="$store.weather"
+        />
+        <settings-form
+          class="fade-in flip-card-back"
+          v-if="!$store.location || $store.settings"
+        />
+        <div v-if="$store.error && !$store.settings" class="error">
+          Error Loading Weather Data
+          <p style="color:white">Make sure zip is valid</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -42,23 +58,52 @@ export default {
 
 <style lang="scss" scoped>
 .weather-widget {
-  border-top: 5px solid #ad4343;
-  border-radius: 5px;
+  overflow: hidden;
   position: relative;
+  text-align: left;
+  border-radius: 5px;
   background: var(--bg-color);
-  min-width: 400px;
+  min-width: 425px;
   display: inline-block;
-  margin: 0 auto;
-  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid black;
   padding: 20px;
-  min-height: 157px;
-  .inner {
-    transition: 0.5s ease all;
+  height: 160px;
+  .fade-in {
+    transition: 1s ease all;
   }
   &.loading {
-    .inner {
+    .fade-in {
       opacity: 0;
     }
   }
+  &:not(.flat) {
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 10;
+      width: 150%;
+      background: white;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      pointer-events: none;
+    }
+    &::before {
+      height: 15%;
+      opacity: 0.1;
+      box-shadow: 0 0 20px 20px white;
+    }
+    &::after {
+      height: 1%;
+      opacity: 0.02;
+      box-shadow: 0 0 5px 5px white;
+    }
+  }
+}
+.error {
+  color: var(--accent-color);
 }
 </style>

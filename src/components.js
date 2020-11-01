@@ -1,8 +1,7 @@
 import Vue from "vue";
 import WeatherWidget from "@/components/WeatherWidget";
-import Temperature from "@/components/Temperature";
 import TempUnitSwitch from "@/components/TempUnitSwitch";
-import LocationForm from "@/components/LocationForm";
+import SettingsForm from "@/components/SettingsForm";
 import WeatherDisplay from "@/components/WeatherDisplay";
 import WeatherIcon from "@/components/icons/WeatherIcon";
 import PlayGround from "@/components/PlayGround";
@@ -14,7 +13,8 @@ import {
   faSyncAlt,
   faThermometerThreeQuarters,
   faSnowflake,
-  faCloudRain
+  faCloudRain,
+  faCog
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -24,13 +24,13 @@ library.add(
   faSyncAlt,
   faThermometerThreeQuarters,
   faSnowflake,
-  faCloudRain
+  faCloudRain,
+  faCog
 );
 
 Vue.component("WeatherWidget", WeatherWidget);
-Vue.component("Temperature", Temperature);
 Vue.component("TempUnitSwitch", TempUnitSwitch);
-Vue.component("LocationForm", LocationForm);
+Vue.component("SettingsForm", SettingsForm);
 Vue.component("WeatherDisplay", WeatherDisplay);
 Vue.component("WeatherIcon", WeatherIcon);
 Vue.component("font-awesome-icon", FontAwesomeIcon);

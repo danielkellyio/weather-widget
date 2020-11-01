@@ -1,16 +1,46 @@
 <template>
   <div id="app">
+    <h1>
+      Weather Widget
+    </h1>
+
     <weather-widget />
-    <small class="muted block" style="margin-top:5px;">
-      Icons from: https://codepen.io/joshbader/pen/EjXgqr
-    </small>
-    <play-ground />
+    <div class="meta">
+      <small class="muted">
+        <a href="" target="_blank">Github Repo</a> |
+        <a href="https://codepen.io/joshbader/pen/EjXgqr" target="_blank">
+          Weather Icon Source
+        </a>
+        |
+        <a href="#" @click="playground = !playground">Developer Playground</a>
+      </small>
+    </div>
+
+    <play-ground v-if="playground" />
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      playground: false
+    };
+  }
+};
+</script>
+
 <style lang="scss">
 :root {
-  --bg-color: #272727;
+  //--bg-color: #272727;
+  --bg-color: #383636;
+  --accent-color: #ad4343;
+  --cold: #1e3a58;
+  --cold-light: #30557c;
+  --hot: #ac4949;
+  --hot-light: #d97171;
+  --moderate: #555963;
+  --moderate-light: #7d8391;
 }
 #app {
   font-family: "Open Sans", sans-serif;
@@ -29,5 +59,12 @@ img {
 }
 .block {
   display: block;
+}
+.meta {
+  margin-top: 20px;
+  a {
+    margin: 0 10px 0;
+    color: inherit;
+  }
 }
 </style>

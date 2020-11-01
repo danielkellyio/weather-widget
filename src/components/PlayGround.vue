@@ -1,21 +1,41 @@
 <template>
   <div style="margin-top:10px;">
-    <input
-      type="text"
-      v-model="$store.weather.name"
-      placeholder="Location Name"
-    />
-    <input
-      type="text"
-      v-model="$store.weather.wind.speed"
-      placeholder="Wind Speed"
-    />
-    <input type="text" v-model="$store.description" placeholder="Description" />
-    <select type="text" v-model="$store.icon">
-      <option v-for="(label, value) in icons" :value="value" :key="value">
-        {{ label }}
-      </option>
-    </select>
+    <h3>
+      Developer Playground
+    </h3>
+    <label>
+      Location
+      <input type="text" v-model="$store.weather.name" />
+    </label>
+
+    <label>
+      Temp
+      <input type="number" v-model="$store.temp" />
+    </label>
+
+    <label>
+      Wind Speed
+      <input type="text" v-model="$store.weather.wind.speed" />
+    </label>
+
+    <label>
+      Description
+      <input type="text" v-model="$store.description" />
+    </label>
+
+    <label>
+      Icon
+      <select type="text" v-model="$store.icon">
+        <option v-for="(label, value) in icons" :value="value" :key="value">
+          {{ label }}
+        </option>
+      </select>
+    </label>
+
+    <label>
+      Settings Active
+      <input type="checkbox" v-model="$store.settings" />
+    </label>
   </div>
 </template>
 
@@ -47,3 +67,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+label {
+  display: inline-block;
+  margin-right: 20px;
+}
+</style>

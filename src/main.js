@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import "./components";
 import "./assets/icons.scss";
+import "./assets/flip-card.scss";
 import store from "@/store";
 
 Vue.config.productionTip = false;
