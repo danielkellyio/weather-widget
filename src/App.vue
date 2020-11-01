@@ -7,7 +7,13 @@
     <weather-widget />
     <div class="meta">
       <small class="muted">
-        <a href="" target="_blank">Github Repo</a> |
+        <a
+          href="https://github.com/danielkellyio/weather-widget"
+          target="_blank"
+        >
+          Github Repo
+        </a>
+        |
         <a href="https://codepen.io/joshbader/pen/EjXgqr" target="_blank">
           Weather Icon Source
         </a>
