@@ -55,6 +55,8 @@ body {
 #app {
   font-family: "Open Sans", sans-serif;
   text-align: center;
+  will-change: transform;
+  animation: fadeDown 1s ease;
 }
 *,
 *:after,

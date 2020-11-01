@@ -75,44 +75,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@keyframes subtleGrow {
-  0% {
-    transform: scale(0.65);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  100% {
-    opacity: 0.7;
-    transform: translateY(0);
-  }
-}
-@keyframes fadeDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 0.7;
-    transform: translateY(0);
-  }
-}
-@keyframes fadeDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 0.7;
-    transform: translateY(0);
-  }
-}
 .weather-display {
   display: flex;
   text-align: left;

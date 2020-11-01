@@ -1,21 +1,21 @@
 <template>
-  <div class="flip-card" :class="{ flipped: $store.flipped }">
+  <div class="flip-card" :class="{ flipped: $store.isFlipped }">
     <div
       class="weather-widget flip-card-inner"
       :class="{ loading: $store.loading, flat: $store.flat }"
     >
       <div class="fade-in">
-        <widget-settings :class="{ 'flip-card-back': $store.settings }" />
+        <widget-settings :class="{ 'flip-card-back': $store.isFlipped }" />
         <weather-display
           class="fade-in"
-          v-if="$store.location && !$store.settings && !$store.error"
+          v-if="$store.showWeatherDisplay"
           :weather="$store.weather"
         />
         <settings-form
           class="fade-in flip-card-back"
-          v-if="!$store.location || $store.settings"
+          v-if="$store.showSettings"
         />
-        <div v-if="$store.error && !$store.settings" class="error">
+        <div v-if="$store.showError" class="error">
           Error Loading Weather Data
           <p style="color:white">
             Make sure zip is valid
@@ -55,6 +55,7 @@ export default {
   },
   created() {
     this.$store.initWeather();
+    if (!this.$store.location) this.$store.flipped = true;
   }
 };
 </script>

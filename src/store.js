@@ -17,6 +17,18 @@ export default Vue.observable({
     snow: {},
     rain: {}
   },
+  get isFlipped() {
+    return !this.location || this.flipped;
+  },
+  get showSettings() {
+    return !this.location || this.settings;
+  },
+  get showWeatherDisplay() {
+    return !this.showSettings && !this.error;
+  },
+  get showError() {
+    return this.error && !this.settings;
+  },
   get tempUnitAbbrev() {
     return this.tempUnit[0].toUpperCase();
   },
@@ -76,6 +88,7 @@ export default Vue.observable({
 
       this.error = false;
       this.weather = response.data;
+      this.flipped = false;
       window.localStorage.setItem("location", JSON.stringify(this.location));
       window.localStorage.setItem("locationType", this.locationType);
     } catch (error) {
