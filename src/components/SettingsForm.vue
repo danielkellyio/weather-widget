@@ -55,7 +55,8 @@ export default {
       if (!this.validZip(zip)) return;
       this.$store.locationType = "byZip";
       this.$store.location = zip;
-      this.$store.getWeatherData();
+      await this.$store.getWeatherData();
+      this.$store.flipped = false;
       this.$store.settings = false;
     }, 300),
     async handleCurrentLocation() {
@@ -63,7 +64,8 @@ export default {
         const location = await new GeoLocation().getCurrent();
         this.$store.locationType = "byGeoLocation";
         this.$store.location = location;
-        this.$store.getWeatherData();
+        await this.$store.getWeatherData();
+        this.$store.flipped = false;
         this.$store.settings = false;
       } catch (err) {
         console.log(err);

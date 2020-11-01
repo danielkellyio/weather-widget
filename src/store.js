@@ -88,7 +88,6 @@ export default Vue.observable({
 
       this.error = false;
       this.weather = response.data;
-      this.flipped = false;
       window.localStorage.setItem("location", JSON.stringify(this.location));
       window.localStorage.setItem("locationType", this.locationType);
     } catch (error) {
