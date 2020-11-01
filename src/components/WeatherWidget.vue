@@ -5,7 +5,7 @@
       :class="{ loading: $store.loading, flat: $store.flat }"
     >
       <div class="fade-in">
-        <reload-trigger :class="{ 'flip-card-back': $store.settings }" />
+        <widget-settings :class="{ 'flip-card-back': $store.settings }" />
         <weather-display
           class="fade-in"
           v-if="$store.location && !$store.settings && !$store.error"
@@ -17,7 +17,10 @@
         />
         <div v-if="$store.error && !$store.settings" class="error">
           Error Loading Weather Data
-          <p style="color:white">Make sure zip is valid</p>
+          <p style="color:white">
+            Make sure zip is valid
+            <a href="#" @click.prevent="$store.settings = true">Try Again</a>
+          </p>
         </div>
       </div>
     </div>
@@ -102,8 +105,11 @@ export default {
       box-shadow: 0 0 5px 5px white;
     }
   }
+  a {
+    color: var(--accent-color);
+  }
 }
 .error {
-  color: var(--accent-color);
+  color: var(--hot-light);
 }
 </style>

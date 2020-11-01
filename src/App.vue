@@ -34,13 +34,17 @@ export default {
 :root {
   //--bg-color: #272727;
   --bg-color: #383636;
-  --accent-color: #ad4343;
+  --accent-color: #52a6fe;
   --cold: #1e3a58;
   --cold-light: #30557c;
   --hot: #ac4949;
   --hot-light: #d97171;
   --moderate: #555963;
   --moderate-light: #7d8391;
+}
+body {
+  background: rgb(255, 255, 255);
+  background: radial-gradient(circle, white 41%, #fffbf4 100%);
 }
 #app {
   font-family: "Open Sans", sans-serif;

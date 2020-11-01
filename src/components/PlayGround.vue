@@ -36,6 +36,12 @@
       Settings Active
       <input type="checkbox" v-model="$store.settings" />
     </label>
+
+    <br /><br />
+    <small
+      ><strong>Tip:</strong> Move temp under 50 and above 90 to see style
+      changes indicating temperature extremes</small
+    >
   </div>
 </template>
 

@@ -1,10 +1,9 @@
 import Vue from "vue";
 import App from "./App.vue";
-import router from "./router";
-import "./components";
-import "./assets/icons.scss";
-import "./assets/flip-card.scss";
 import store from "@/store";
+
+import "./components";
+import "./assets/style.scss";
 
 Vue.config.productionTip = false;
 
@@ -17,6 +16,5 @@ Vue.mixin({
 });
 
 new Vue({
-  router,
   render: h => h(App)
 }).$mount("#app");
