@@ -6,13 +6,34 @@
         <small class="description">{{ $store.description }}</small>
       </h1>
       <h2>
-        <span>
+        <!-- Temp Min/Max -->
+        <span title="Temperature min/max">
+          <font-awesome-icon class="icon" icon="thermometer-three-quarters" />
+          {{ $store.tempMin }}/{{ $store.tempMax }}
+        </span>
+
+        <!-- Location -->
+        <span title="Location">
           <font-awesome-icon class="icon" icon="location-arrow" />
           {{ weather.name }}
         </span>
-        <span>
+
+        <!-- Wind Speed -->
+        <span v-if="weather.wind" title="Wind Speed">
           <font-awesome-icon class="icon" icon="wind" />
           {{ weather.wind.speed }} mph
+        </span>
+
+        <!-- Snow Volume-->
+        <span v-if="weather.snow" title="Snow Volume">
+          <font-awesome-icon class="icon" icon="snowflake" />
+          {{ weather.snow["1h"] }} mm/hr
+        </span>
+
+        <!-- Rain Volume-->
+        <span v-if="weather.rain" title="Rain Volume for the Last Hour">
+          <font-awesome-icon class="icon" icon="cloud-rain" />
+          {{ weather.rain["1h"] }} mm/hr
         </span>
       </h2>
     </div>
@@ -30,6 +51,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@keyframes subtleGrow {
+  0% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+}
 .weather-display {
   display: flex;
   text-align: left;
@@ -49,6 +88,7 @@ export default {
   .description {
     font-size: 1.4rem;
     font-weight: 300;
+    margin-left: -1rem;
   }
 
   h2 {
@@ -56,8 +96,10 @@ export default {
     margin: 0;
     font-weight: 100;
     opacity: 0.7;
+    animation: fadeUp 0.6s ease;
     span {
       margin-right: 5px;
+      display: inline-block;
       .icon {
         opacity: 0.5;
       }
@@ -70,6 +112,7 @@ export default {
 }
 .right {
   width: 35%;
+  animation: 1s subtleGrow ease;
 }
 .right,
 .left {

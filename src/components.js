@@ -1,9 +1,7 @@
 import Vue from "vue";
 import WeatherWidget from "@/components/WeatherWidget";
-import Location from "@/components/Location";
 import Temperature from "@/components/Temperature";
 import TempUnitSwitch from "@/components/TempUnitSwitch";
-import Conditions from "@/components/Conditions";
 import LocationForm from "@/components/LocationForm";
 import WeatherDisplay from "@/components/WeatherDisplay";
 import WeatherIcon from "@/components/icons/WeatherIcon";
@@ -13,17 +11,25 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faLocationArrow,
   faWind,
-  faSyncAlt
+  faSyncAlt,
+  faThermometerThreeQuarters,
+  faSnowflake,
+  faCloudRain
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faLocationArrow, faWind, faSyncAlt);
+library.add(
+  faLocationArrow,
+  faWind,
+  faSyncAlt,
+  faThermometerThreeQuarters,
+  faSnowflake,
+  faCloudRain
+);
 
 Vue.component("WeatherWidget", WeatherWidget);
-Vue.component("Location", Location);
 Vue.component("Temperature", Temperature);
 Vue.component("TempUnitSwitch", TempUnitSwitch);
-Vue.component("Conditions", Conditions);
 Vue.component("LocationForm", LocationForm);
 Vue.component("WeatherDisplay", WeatherDisplay);
 Vue.component("WeatherIcon", WeatherIcon);

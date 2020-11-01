@@ -8,7 +8,15 @@ export default Vue.observable({
     weather: [],
     main: {},
     name: null,
-    wind: {}
+    wind: {},
+    snow: {},
+    rain: {}
+  },
+  get tempMin() {
+    return Math.round(this.weather.main.temp_min);
+  },
+  get tempMax() {
+    return Math.round(this.weather.main.temp_max);
   },
   get description() {
     const weather = this.weather.weather;
@@ -42,12 +50,14 @@ export default Vue.observable({
     }
   },
   async getWeatherData() {
+    this.loading = true;
     const response = await new Weather()
       .fahrenheit()
       [this.locationType](this.location)
       .get();
 
     this.weather = response.data;
+    this.loading = false;
     window.localStorage.setItem("location", JSON.stringify(this.location));
     window.localStorage.setItem("locationType", this.locationType);
   }

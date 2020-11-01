@@ -1,16 +1,10 @@
 <template>
   <span @click="$store.getWeatherData()" class="reload-icon">
-    <font-awesome-icon icon="sync-alt" style="color:white" :class="{ spin }" />
+    <font-awesome-icon icon="sync-alt" style="color:white" />
   </span>
 </template>
 <script>
-export default {
-  computed: {
-    spin() {
-      return this.$store.loading;
-    }
-  }
-};
+export default {};
 </script>
 
 <style scoped lang="scss">

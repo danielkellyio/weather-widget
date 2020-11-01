@@ -1,8 +1,10 @@
 <template>
-  <div class="weather-widget">
-    <reload-trigger />
-    <weather-display v-if="$store.location" :weather="$store.weather" />
-    <location-form v-else />
+  <div class="weather-widget" :class="{ loading: $store.loading }">
+    <div class="inner">
+      <reload-trigger />
+      <weather-display v-if="$store.location" :weather="$store.weather" />
+      <location-form v-else />
+    </div>
   </div>
 </template>
 <script>
@@ -40,6 +42,8 @@ export default {
 
 <style lang="scss" scoped>
 .weather-widget {
+  border-top: 5px solid #ad4343;
+  border-radius: 5px;
   position: relative;
   background: var(--bg-color);
   min-width: 400px;
@@ -47,5 +51,14 @@ export default {
   margin: 0 auto;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
   padding: 20px;
+  min-height: 157px;
+  .inner {
+    transition: 0.5s ease all;
+  }
+  &.loading {
+    .inner {
+      opacity: 0;
+    }
+  }
 }
 </style>

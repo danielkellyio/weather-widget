@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <weather-widget />
+    <small class="muted block" style="margin-top:5px;">
+      Icons from: https://codepen.io/joshbader/pen/EjXgqr
+    </small>
     <play-ground />
   </div>
 </template>
@@ -20,5 +23,11 @@
 }
 img {
   max-width: 100%;
+}
+.muted {
+  opacity: 0.5;
+}
+.block {
+  display: block;
 }
 </style>
