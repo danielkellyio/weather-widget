@@ -27,32 +27,8 @@
   </div>
 </template>
 <script>
-import Weather from "@/support/Weather";
 
 export default {
-  data() {
-    return {
-      location: null,
-      weather: {
-        weather: [],
-        main: {},
-        name: null,
-        wind: {}
-      }
-    };
-  },
-  methods: {
-    async getWeatherData({ location, locationType }) {
-      const response = await new Weather()
-        .fahrenheit()
-        [locationType](location)
-        .get();
-
-      this.$store.weather = response.data;
-      window.localStorage.setItem("location", JSON.stringify(location));
-      window.localStorage.setItem("locationType", locationType);
-    }
-  },
   created() {
     this.$store.initWeather();
     if (!this.$store.location) this.$store.flipped = true;
